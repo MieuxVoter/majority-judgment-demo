@@ -7,31 +7,39 @@ import ReactSlider from "react-slider";
 import styled from "styled-components";
 
 const StyledSlider = styled(ReactSlider)`
-    width: 100%;
-    height: 20px;
+    width: 305px;
+    height: 16px;
 `;
 
 const StyledTrack = styled.div`
     top: 0;
     bottom: 0;
-    background: ${(props: any) =>
-        props.index === 2 ? "#CCC" : props.index === 1 ? "#5A5AFF" : "#CCC"};
-    border-radius: 999px;
+    background: ${(props: any) => colors[props.index]};
 `;
+
+const excellent = "#3A9918";
+const tresBien = "#A0CF1C";
+const bien = "#D3D715";
+const assezBien = "#C2B113";
+const passable = "#C27C13";
+const insuffisant = "#C23D13";
+const colors = [excellent, tresBien, bien, assezBien, passable, insuffisant];
 
 const StyledThumb = styled.div`
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
+    height: 26px;
+    width: 10px;
     text-align: center;
-    background-color: #000;
-    color: #fff;
-    border-radius: 50%;
+    background-color: #f2f0ff;
+    color: #0;
+    mix-blend-mode: normal;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
     cursor: grab;
-    transform: translateY(-10px);
+    top: -5px;
 `;
 
-const Thumb = (props: any, state: any) => <StyledThumb {...props}>{state.valueNow}</StyledThumb>;
+//{state.valueNow}
+const Thumb = (props: any, state: any) => <StyledThumb {...props}></StyledThumb>;
 
 const Track = (props: any, state: any) => <StyledTrack {...props} index={state.index} />;
 
@@ -39,13 +47,16 @@ const App = () => {
     return (
         <Container className="p-3">
             <StyledSlider
-                min={10}
-                max={2000}
-                defaultValue={[25, 100, 150]}
+                min={0}
+                max={100}
+                defaultValue={[2, 10, 20, 40, 50]}
                 renderTrack={Track}
                 renderThumb={Thumb}
                 pearling
             />
+            <br />
+            <br />
+            <br />
             <h2>Buttons</h2>
             <div className="p-1">
                 <Button variant="primary" className="mr-1">
