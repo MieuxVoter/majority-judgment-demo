@@ -1,9 +1,44 @@
+* {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.btn-outline-danger:not(:active) {
+    background: #f2f0ff;
+}
+
+.btn-delete {
+    width: 38px;
+    height: 32px;
+}
+
 #root {
     background-color: #191e2f;
 }
 
 .proposal-card {
     background-color: white;
+}
+
+.jm-vr {
+    border-left: 2px dashed #0a00ac;
+    height: 36px;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transform: translateY(-50%);
+}
+
+.mention-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color: #ffffff;
 }
 
 .App {
