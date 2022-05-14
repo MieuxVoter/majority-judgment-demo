@@ -15,8 +15,9 @@
     height: 32px;
 }
 
-#root {
-    background-color: #191e2f;
+html,
+body {
+    background-color: #191e2f !important;
 }
 
 .proposal-card {
@@ -31,14 +32,18 @@
     left: 50%;
     transform: translateX(-50%);
     transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .mention-container {
-    display: flex;
+    width: 74px !important;
+    height: 32px;
     align-items: center;
     text-align: center;
     letter-spacing: -0.5px;
     color: #ffffff;
+    margin: auto;
+    padding: 3px 0;
 }
 
 .App {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Button } from "react-bootstrap";
 import ReactSlider from "react-slider";
+import { Proposal, ProposalAnalysis } from "scalable-majority-judgment";
 
 import styled from "styled-components";
 
@@ -22,6 +23,12 @@ const StyledTrack = styled.div`
     background: ${(props: any) => defaultMentions[props.index].color};
 `;
 
+const StyledDiv = styled.div`
+    background-color: ${(props: any) => {
+        return props.color;
+    }};
+`;
+
 type Mention = {
     name: string;
     color: string;
@@ -35,12 +42,6 @@ const defaultMentions: Mention[] = [
     { name: "Passable", color: "#C27C13" },
     { name: "Insuffisant", color: "#C23D13" },
 ];
-
-const StyledDiv = styled(Container)`
-    background-color: ${defaultMentions[0].color};
-    width: 74px;
-    height: 32px;
-`;
 
 const StyledThumb = styled.div`
     height: 26px;
@@ -57,8 +58,9 @@ const StyledThumb = styled.div`
 
 //{state.valueNow}
 const Thumb = (props: any, state: any) => <StyledThumb {...props}></StyledThumb>;
-
 const Track = (props: any, state: any) => <StyledTrack {...props} index={state.index} />;
+const MentionDiv = (props: any) => <StyledDiv {...props} />;
+const analysis: ProposalAnalysis = new ProposalAnalysis();
 
 const JMSlider = ({
     colors: mentions,
@@ -79,10 +81,26 @@ const JMSlider = ({
         throw new Error("colors must have the same length than values");
     }
 
+    const meritProfile: bigint[] = [];
+    let previous = 0;
+
+    for (let i = 0; i < values.length; ++i) {
+        meritProfile[i] = BigInt(values[i] - previous);
+        previous = values[i];
+    }
+
+    meritProfile.push(BigInt(max - previous));
+
+    analysis.update(new Proposal(meritProfile), false);
+    const mention = mentions[analysis.medianMentionIndex];
+    console.log("color: " + mention.color);
+
     return (
         <Container>
             <Container className="text-center">
-                <StyledDiv className="mention-container"> {mentions[0].name}</StyledDiv>
+                <MentionDiv className="mention-container" color={mention.color}>
+                    {mention.name}
+                </MentionDiv>
             </Container>
             <StyledContainer>
                 <StyledSlider
