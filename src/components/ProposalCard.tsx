@@ -18,7 +18,13 @@ const StyledSpan = styled.span`
     margin-right: 8px;
 `;
 
-const ProposalCard = () => {
+const ProposalCard = ({
+    proposal,
+    onDeleteButtonClicked,
+}: {
+    proposal: string;
+    onDeleteButtonClicked: Function;
+}) => {
     const [sliderMin, setSliderMin] = React.useState(0);
     const [sliderMax, setSliderMax] = React.useState(100);
     const [sliderStats, setSliderStats] = React.useState([2, 10, 20, 40, 50]);
@@ -26,13 +32,17 @@ const ProposalCard = () => {
         setSliderStats(value);
     };
 
+    const onDeleteClicked = () => {
+        onDeleteButtonClicked(proposal);
+    };
+
     return (
         <div className="proposal-card first">
             <div className="header">
                 <div className="d-inline-flex justify-content" color={color}>
-                    <StyledSpan>1</StyledSpan> Cameron Williamson
+                    <StyledSpan>1</StyledSpan> {proposal}
                 </div>
-                <Button variant="outline-danger" className="btn-delete">
+                <Button variant="outline-danger" className="btn-delete" onClick={onDeleteClicked}>
                     X
                 </Button>
             </div>
