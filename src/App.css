@@ -88,6 +88,25 @@ body {
 
 .proposal-card {
     background-color: white;
+    margin-bottom: 8px;
+}
+
+.proposal-card input {
+    border-color: #2400fd;
+    background-color: #f2f0ff;
+}
+
+.proposal-card.new button.btn-primary {
+    background-color: #2400fd;
+    font-size: 24px;
+    margin-left: 10px;
+    width: 38px;
+    line-height: 0.5;
+}
+
+.proposal-card.new {
+    height: 56px;
+    padding: 12px;
 }
 
 .jm-vr {
