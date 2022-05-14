@@ -3,8 +3,10 @@ import { Container, Navbar, Button } from "react-bootstrap";
 import styled from "styled-components";
 import JMSlider from "./JMSlider";
 
+const color = "#2400fd";
+
 const StyledSpan = styled.span`
-    background-color: #2400fd;
+    background-color: ${color};
     width: 24px;
     height: 24px;
     font-size: 16px;
@@ -13,6 +15,7 @@ const StyledSpan = styled.span`
     align-items: center;
     display: flex;
     justify-content: center;
+    margin-right: 8px;
 `;
 
 const ProposalCard = () => {
@@ -24,29 +27,27 @@ const ProposalCard = () => {
     };
 
     return (
-        <Container className="proposal-card">
-            <Navbar>
-                <Container>
-                    <Navbar.Brand className="justify-content">
-                        <StyledSpan>1</StyledSpan> Cameron Williamson
-                    </Navbar.Brand>
-                    <Navbar.Collapse className="justify-content-end">
-                        <Button variant="outline-danger" className="btn-delete">
-                            X
-                        </Button>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <Container className="proposal-body">
+        <div className="proposal-card first">
+            <div className="header">
+                <div className="d-inline-flex justify-content" color={color}>
+                    <StyledSpan>1</StyledSpan> Cameron Williamson
+                </div>
+                <Button variant="outline-danger" className="btn-delete">
+                    X
+                </Button>
+            </div>
+            <div>
                 <JMSlider
                     min={sliderMin}
                     max={sliderMax}
                     values={sliderStats}
                     onValueChanged={onValueChanged}
                 ></JMSlider>
+            </div>
+            <Container className="p-0 d-flex justify-content-center collapse">
+                <div className="chevron bottom"></div>
             </Container>
-            <Container>i</Container>
-        </Container>
+        </div>
     );
 };
 

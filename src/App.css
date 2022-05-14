@@ -6,13 +6,79 @@
     line-height: 24px;
 }
 
-.btn-outline-danger:not(:active) {
-    background: #f2f0ff;
+.btn-outline-danger {
+    border-color: #ff3e37 !important;
+    background-color: #f2f0ff !important;
+    color: #ff3e37 !important;
+}
+
+.btn-outline-danger:hover {
+    background-color: #ff3e37 !important;
+    color: #f2f0ff !important;
 }
 
 .btn-delete {
     width: 38px;
     height: 32px;
+}
+
+.collapse {
+    height: 30px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.collapse:hover {
+    background-color: #f2f0ff;
+}
+
+.first {
+    color: #2400fd;
+}
+
+.proposal-card .header {
+    height: 56px;
+    vertical-align: middle;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.proposal-card .chevron {
+    padding: auto;
+}
+
+.proposal-card .header button {
+    margin-left: auto;
+}
+
+.chevron {
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    content: "";
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    position: relative;
+    vertical-align: top;
+    border-color: #b1adc6;
+}
+
+.chevron.top {
+    transform: rotate(-45deg);
+}
+
+.chevron.right {
+    transform: rotate(45deg);
+}
+
+.chevron.bottom {
+    transform: rotate(135deg);
+}
+
+.chevron.left {
+    transform: rotate(-135deg);
 }
 
 html,
@@ -44,6 +110,8 @@ body {
     color: #ffffff;
     margin: auto;
     padding: 3px 0;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .App {

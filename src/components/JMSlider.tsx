@@ -12,9 +12,10 @@ const StyledSlider = styled(ReactSlider)`
     transform: translateY(-50%);
 `;
 
-const StyledContainer = styled(Container)`
+const StyledContainer = styled.div`
     position: relative;
     height: 50px;
+    padding: 19px;
 `;
 
 const StyledTrack = styled.div`
@@ -96,12 +97,10 @@ const JMSlider = ({
     console.log("color: " + mention.color);
 
     return (
-        <Container>
-            <Container className="text-center">
-                <MentionDiv className="mention-container" color={mention.color}>
-                    {mention.name}
-                </MentionDiv>
-            </Container>
+        <>
+            <MentionDiv className="mention-container" color={mention.color}>
+                {mention.name}
+            </MentionDiv>
             <StyledContainer>
                 <StyledSlider
                     min={min}
@@ -114,7 +113,7 @@ const JMSlider = ({
                 />
                 <div className="jm-vr"></div>
             </StyledContainer>
-        </Container>
+        </>
     );
 };
 
