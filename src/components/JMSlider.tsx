@@ -72,7 +72,7 @@ const JMSlider = ({
     meritProfile?: bigint[] | null;
     defaultMeritProfile?: bigint[] | null;
     mentions?: Mention[] | null;
-    onValueChanged: (meritProfile: bigint[]) => void;
+    onValueChanged?: ((meritProfile: bigint[]) => void) | null;
 }) => {
     if (meritProfile) defaultMeritProfile = meritProfile;
     else if (!defaultMeritProfile) {
@@ -142,7 +142,8 @@ const JMSlider = ({
         }
 
         internalMeritProfile[sliderValues.length] = BigInt(max - previous);
-        onValueChanged(internalMeritProfile);
+
+        if (onValueChanged) onValueChanged(internalMeritProfile);
 
         if (setInternalMeritProfile) setInternalMeritProfile(internalMeritProfile.slice());
     };
