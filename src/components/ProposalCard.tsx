@@ -25,11 +25,17 @@ const ProposalCard = ({
     proposal: string;
     onDeleteButtonClicked: Function;
 }) => {
-    const [sliderMin, setSliderMin] = React.useState(0);
-    const [sliderMax, setSliderMax] = React.useState(100);
-    const [sliderStats, setSliderStats] = React.useState([2, 10, 20, 40, 50]);
-    const onValueChanged = (value: any, index: number) => {
-        setSliderStats(value);
+    const [meritProfile, setMeritProfile] = React.useState([
+        BigInt(2),
+        BigInt(10),
+        BigInt(20),
+        BigInt(40),
+        BigInt(50),
+        BigInt(60),
+    ]);
+
+    const onValueChanged = (meritProfile: bigint[]) => {
+        setMeritProfile(meritProfile.slice());
     };
 
     const onDeleteClicked = () => {
@@ -47,12 +53,7 @@ const ProposalCard = ({
                 </Button>
             </div>
             <div>
-                <JMSlider
-                    min={sliderMin}
-                    max={sliderMax}
-                    values={sliderStats}
-                    onValueChanged={onValueChanged}
-                ></JMSlider>
+                <JMSlider meritProfile={meritProfile} onValueChanged={onValueChanged}></JMSlider>
             </div>
             <Container className="p-0 d-flex justify-content-center collapse">
                 <div className="chevron bottom"></div>

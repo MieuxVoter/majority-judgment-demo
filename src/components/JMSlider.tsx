@@ -64,37 +64,91 @@ const MentionDiv = (props: any) => <StyledDiv {...props} />;
 const analysis: ProposalAnalysis = new ProposalAnalysis();
 
 const JMSlider = ({
-    colors: mentions,
-    min,
-    max,
-    values,
+    mentions,
+    meritProfile,
+    defaultMeritProfile,
     onValueChanged,
 }: {
-    min: number;
-    max: number;
-    values: number[];
-    colors?: Mention[] | null;
-    onValueChanged: (value: any, index: number) => void;
+    meritProfile?: bigint[] | null;
+    defaultMeritProfile?: bigint[] | null;
+    mentions?: Mention[] | null;
+    onValueChanged: (meritProfile: bigint[]) => void;
 }) => {
+    if (meritProfile) defaultMeritProfile = meritProfile;
+    else if (!defaultMeritProfile) {
+        if (mentions) {
+            if (mentions.length == 0) throw new Error("Mentions parameter cannot be empty");
+
+            defaultMeritProfile = mentions.map((m) => BigInt(1));
+        } else {
+            throw new Error("Must define meritProfile or defaultMeritProfile or mentions.");
+        }
+    } else if (defaultMeritProfile.length == 0) {
+        throw new Error("defaultMeritProfile cannot be empty");
+    }
+
+    const [tmpMeritProfile, tmpSetMeritProfile] = React.useState<bigint[]>(defaultMeritProfile);
+    let internalMeritProfile: bigint[];
+    let setInternalMeritProfile: ((meritProfile: bigint[]) => void) | null = null;
+
+    if (meritProfile) {
+        if (meritProfile.length == 0) throw new Error("meritProfile cannot be empty");
+
+        internalMeritProfile = meritProfile;
+    } else {
+        if (!defaultMeritProfile) {
+            if (mentions) {
+                if (mentions.length == 0) throw new Error("Mentions parameter cannot be empty");
+
+                defaultMeritProfile = mentions.map((_) => BigInt(1));
+            } else {
+                throw new Error("Must define meritProfile or defaultMeritProfile or mentions.");
+            }
+        } else if (defaultMeritProfile.length == 0) {
+            throw new Error("defaultMeritProfile cannot be empty");
+        }
+
+        internalMeritProfile = tmpMeritProfile;
+        setInternalMeritProfile = tmpSetMeritProfile;
+    }
+
     if (mentions == null) {
-        mentions = defaultMentions;
-    } else if (mentions.length != values.length) {
-        throw new Error("colors must have the same length than values");
+        if (internalMeritProfile.length == defaultMentions.length) mentions = defaultMentions;
+        else
+            throw new Error(
+                "The merit profile does not have the same amount of default mentions. Define your own mentions in parameters"
+            );
+    } else if (mentions.length != internalMeritProfile.length) {
+        throw new Error("mentions parameter must have the same length than meritProfile");
     }
 
-    const meritProfile: bigint[] = [];
-    let previous = 0;
+    const sliderValues: number[] = [];
+    const nMention = internalMeritProfile.length;
+    let counter: number = 0;
 
-    for (let i = 0; i < values.length; ++i) {
-        meritProfile[i] = BigInt(values[i] - previous);
-        previous = values[i];
+    for (var i = 0; i < nMention - 1; i++) {
+        counter += Number(internalMeritProfile[i]);
+        sliderValues.push(counter);
     }
 
-    meritProfile.push(BigInt(max - previous));
+    const max: number = counter + Number(internalMeritProfile[nMention - 1]);
 
-    analysis.update(new Proposal(meritProfile), false);
+    const onValueChangedInternal = (sliderValues: any, index: number) => {
+        let previous = 0;
+
+        for (let i = 0; i < sliderValues.length; ++i) {
+            internalMeritProfile[i] = BigInt(sliderValues[i] - previous);
+            previous = sliderValues[i];
+        }
+
+        internalMeritProfile[sliderValues.length] = BigInt(max - previous);
+        onValueChanged(internalMeritProfile);
+
+        if (setInternalMeritProfile) setInternalMeritProfile(internalMeritProfile.slice());
+    };
+
+    analysis.update(new Proposal(internalMeritProfile), false);
     const mention = mentions[analysis.medianMentionIndex];
-    console.log("color: " + mention.color);
 
     return (
         <>
@@ -103,12 +157,12 @@ const JMSlider = ({
             </MentionDiv>
             <StyledContainer>
                 <StyledSlider
-                    min={min}
+                    min={0}
                     max={max}
-                    value={values}
+                    value={sliderValues}
                     renderTrack={Track}
                     renderThumb={Thumb}
-                    onChange={onValueChanged}
+                    onChange={onValueChangedInternal}
                     pearling
                 />
                 <div className="jm-vr"></div>
