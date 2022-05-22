@@ -32,8 +32,29 @@
     background-color: #f2f0ff;
 }
 
-.first {
+.proposal-card.first {
     color: #2400fd;
+}
+
+.proposal-card .header div span {
+    background-color: #0a004c;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 32px;
+    color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 8px;
+}
+
+.proposal-card.first .header div span {
+    background-color: #2400fd;
+}
+
+.proposal-card {
+    color: #0a004c;
 }
 
 .proposal-card .header {

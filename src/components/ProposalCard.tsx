@@ -4,21 +4,6 @@ import styled from "styled-components";
 import JMSlider from "./JMSlider";
 import { Mention } from "./Mention";
 
-const color = "#2400fd";
-
-const StyledSpan = styled.span`
-    background-color: ${color};
-    width: 24px;
-    height: 24px;
-    font-size: 16px;
-    line-height: 32px;
-    color: white;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-right: 8px;
-`;
-
 const ProposalCard = ({
     rank,
     proposal,
@@ -36,11 +21,13 @@ const ProposalCard = ({
     onValueChanged?: ((meritProfile: bigint[]) => void) | null;
     onDeleteClicked: () => void;
 }) => {
+    const className = rank == 1 ? "proposal-card first" : "proposal-card";
+
     return (
-        <div className="proposal-card first">
+        <div className={className}>
             <div className="header">
-                <div className="d-inline-flex justify-content" color={color}>
-                    <StyledSpan>{rank}</StyledSpan> {proposal}
+                <div className="d-inline-flex justify-content">
+                    <span>{rank}</span> {proposal}
                 </div>
                 <Button variant="outline-danger" className="btn-delete" onClick={onDeleteClicked}>
                     X
