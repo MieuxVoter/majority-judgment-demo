@@ -30,7 +30,7 @@ const StyledDiv = styled.div`
     }};
 `;
 
-type Mention = {
+export type Mention = {
     name: string;
     color: string;
 };
@@ -76,13 +76,12 @@ const JMSlider = ({
 }) => {
     if (meritProfile) defaultMeritProfile = meritProfile;
     else if (!defaultMeritProfile) {
-        if (mentions) {
-            if (mentions.length == 0) throw new Error("Mentions parameter cannot be empty");
+        mentions = mentions || defaultMentions;
 
-            defaultMeritProfile = mentions.map((m) => BigInt(1));
-        } else {
-            throw new Error("Must define meritProfile or defaultMeritProfile or mentions.");
-        }
+        if (mentions.length == 0) throw new Error("Mentions parameter cannot be empty");
+
+        const amountPerMention = BigInt(Math.round(100 / mentions.length));
+        defaultMeritProfile = mentions.map((_) => amountPerMention);
     } else if (defaultMeritProfile.length == 0) {
         throw new Error("defaultMeritProfile cannot be empty");
     }

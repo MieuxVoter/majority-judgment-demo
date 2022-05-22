@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import styled from "styled-components";
-import JMSlider from "./JMSlider";
+import JMSlider, { Mention } from "./JMSlider";
 
 const color = "#2400fd";
 
@@ -21,21 +21,21 @@ const StyledSpan = styled.span`
 const ProposalCard = ({
     proposal,
     onDeleteButtonClicked,
+    meritProfile,
+    defaultMeritProfile,
+    mentions,
+    onValueChanged,
 }: {
     proposal: string;
+    meritProfile?: bigint[] | null;
+    defaultMeritProfile?: bigint[] | null;
+    mentions?: Mention[] | null;
+    onValueChanged?: ((meritProfile: bigint[]) => void) | null;
     onDeleteButtonClicked: Function;
 }) => {
     const onDeleteClicked = () => {
         onDeleteButtonClicked(proposal);
     };
-    const defaultMeritProfile = [
-        BigInt(2),
-        BigInt(10),
-        BigInt(20),
-        BigInt(40),
-        BigInt(50),
-        BigInt(60),
-    ];
 
     return (
         <div className="proposal-card first">
@@ -48,7 +48,9 @@ const ProposalCard = ({
                 </Button>
             </div>
             <div>
-                <JMSlider defaultMeritProfile={defaultMeritProfile}></JMSlider>
+                <JMSlider
+                    {...{ meritProfile, defaultMeritProfile, mentions, onValueChanged }}
+                ></JMSlider>
             </div>
             <Container className="p-0 d-flex justify-content-center collapse">
                 <div className="chevron bottom"></div>
