@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import styled from "styled-components";
-import JMSlider, { Mention } from "./JMSlider";
+import JMSlider from "./JMSlider";
+import { Mention } from "./Mention";
 
 const color = "#2400fd";
 
@@ -19,29 +20,27 @@ const StyledSpan = styled.span`
 `;
 
 const ProposalCard = ({
+    rank,
     proposal,
-    onDeleteButtonClicked,
+    onDeleteClicked,
     meritProfile,
     defaultMeritProfile,
     mentions,
     onValueChanged,
 }: {
+    rank: number;
     proposal: string;
     meritProfile?: bigint[] | null;
     defaultMeritProfile?: bigint[] | null;
     mentions?: Mention[] | null;
     onValueChanged?: ((meritProfile: bigint[]) => void) | null;
-    onDeleteButtonClicked: Function;
+    onDeleteClicked: () => void;
 }) => {
-    const onDeleteClicked = () => {
-        onDeleteButtonClicked(proposal);
-    };
-
     return (
         <div className="proposal-card first">
             <div className="header">
                 <div className="d-inline-flex justify-content" color={color}>
-                    <StyledSpan>1</StyledSpan> {proposal}
+                    <StyledSpan>{rank}</StyledSpan> {proposal}
                 </div>
                 <Button variant="outline-danger" className="btn-delete" onClick={onDeleteClicked}>
                     X
