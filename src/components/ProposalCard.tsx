@@ -3,6 +3,7 @@ import { Container, Navbar, Button } from "react-bootstrap";
 import styled from "styled-components";
 import JMSlider from "./JMSlider";
 import { Mention } from "./Mention";
+import BigIntInput from "./BigIntInput";
 
 const ProposalCard = ({
     rank,
@@ -41,6 +42,7 @@ const ProposalCard = ({
             <Container className="p-0 d-flex justify-content-center collapse">
                 <div className="chevron bottom"></div>
             </Container>
+            <BigIntInput />
         </div>
     );
 };
