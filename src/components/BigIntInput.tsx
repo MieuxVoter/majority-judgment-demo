@@ -1,11 +1,29 @@
 import React, { ChangeEvent, KeyboardEvent, MouseEvent } from "react";
 import { Button, Form } from "react-bootstrap";
 
-const BigIntInput = () => {
-    const [value, setValue] = React.useState<bigint>(BigInt(0));
+const BigIntInput = ({
+    value,
+    defaultValue,
+    onChange,
+}: {
+    value?: bigint | null;
+    defaultValue?: bigint | null;
+    onChange?: ((newValue: bigint) => {}) | null;
+}) => {
+    const [valueState, setValueState] = React.useState<bigint>(
+        defaultValue != null ? defaultValue : BigInt(0)
+    );
 
-    const preventDecimalOnKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    const finalValue = value || valueState;
+
+    const bigIntCharCheckOnKeyDown = (event: KeyboardEvent<HTMLElement>) => {
         if (!event.key.match(/[0-9]/g)) event.preventDefault();
+    };
+
+    const setValue = (value: bigint) => {
+        setValueState(value);
+
+        if (onChange != null) onChange(value);
     };
 
     const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +31,7 @@ const BigIntInput = () => {
     };
 
     const addToValue = (amount: bigint) => (event: MouseEvent<HTMLButtonElement>) =>
-        setValue(value + amount);
+        setValue(valueState + amount);
 
     return (
         <Form.Group>
@@ -21,9 +39,9 @@ const BigIntInput = () => {
             <Button onClick={addToValue(BigInt(-1))}>{"<"}</Button>
             <Form.Control
                 datatype="number"
-                onKeyDown={preventDecimalOnKeyDown}
+                onKeyDown={bigIntCharCheckOnKeyDown}
                 onChange={onInputChange}
-                value={value.toString()}
+                value={finalValue.toString()}
             ></Form.Control>
             <Button onClick={addToValue(BigInt(1))}>{">"}</Button>
             <Button onClick={addToValue(BigInt(10))}>{">>"}</Button>
