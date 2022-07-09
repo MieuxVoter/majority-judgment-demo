@@ -3,7 +3,7 @@ import ReactSlider from "react-slider";
 import { Proposal, ProposalAnalysis } from "scalable-majority-judgment";
 
 import styled from "styled-components";
-import { Mention } from "./Mention";
+import { getDefaultMentions, Mention } from "./Mention";
 
 const StyledSlider = styled(ReactSlider)`
     width: 100%;
@@ -30,20 +30,7 @@ const StyledDiv = styled.div`
     }};
 `;
 
-const defaultMentions: Mention[] = [
-    { name: "Excellent", color: "#3A9918" },
-    { name: "Très Bien", color: "#A0CF1C" },
-    { name: "Bien", color: "#D3D715" },
-    { name: "Assez Bien", color: "#C2B113" },
-    { name: "Passable", color: "#C27C13" },
-    { name: "Insuffisant", color: "#C23D13" },
-];
-
-export const getDefaultMentions = () => defaultMentions.slice();
-export const getDefaultMeritProfile = () => {
-    const amountPerMention = BigInt(Math.round(100 / defaultMentions.length));
-    return defaultMentions.map((_) => amountPerMention);
-};
+const defaultMentions: Mention[] = getDefaultMentions();
 
 const StyledThumb = styled.div`
     height: 26px;

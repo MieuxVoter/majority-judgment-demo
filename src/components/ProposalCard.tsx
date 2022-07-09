@@ -1,8 +1,7 @@
 import React from "react";
-import { Container, Navbar, Button } from "react-bootstrap";
-import styled from "styled-components";
+import { Container, Navbar, Button, Collapse } from "react-bootstrap";
 import JMSlider from "./JMSlider";
-import { Mention } from "./Mention";
+import { getDefaultMentions, getDefaultMeritProfile, Mention } from "./Mention";
 import BigIntInput from "./BigIntInput";
 
 const ProposalCard = ({
@@ -22,7 +21,35 @@ const ProposalCard = ({
     onValueChanged?: ((meritProfile: bigint[]) => void) | null;
     onDeleteClicked: () => void;
 }) => {
+    const [meritProfileState, setMeritProfileState] = React.useState<bigint[]>(
+        meritProfile || getDefaultMeritProfile()
+    );
+
+    const finalMeritProfile = meritProfile || meritProfileState;
+
+    const [bigIntControlsOpen, setBigIntControlsOpen] = React.useState<boolean>(false);
     const className = rank == 1 ? "proposal-card first" : "proposal-card";
+    const finalMentions = mentions || getDefaultMentions();
+    const nMention = finalMeritProfile.length
+
+    if (finalMentions.length != nMention)
+        throw new Error("The amount of mention must be the same than mention index amount in meritProfile");
+
+    const mentionControls = [];
+
+    for (let i = 0; i < nMention; ++i){
+        const index = i;
+        const onControlChange = (value:bigint)=>{
+            finalMeritProfile[index] = value;
+            const newMeritProfile = finalMeritProfile.slice(0); 
+            setMeritProfileState(newMeritProfile);
+    
+            if (onValueChanged != null)
+                onValueChanged(newMeritProfile);
+        }
+
+        mentionControls.push(<BigIntInput key={i} color={finalMentions[i].color} value={finalMeritProfile[i]} onChange={onControlChange} className="my-3"/>);
+    }
 
     return (
         <div className={className}>
@@ -36,13 +63,17 @@ const ProposalCard = ({
             </div>
             <div>
                 <JMSlider
-                    {...{ meritProfile, defaultMeritProfile, mentions, onValueChanged }}
+                    {...{ meritProfile, defaultMeritProfile, theMentions: finalMentions, onValueChanged }}
                 ></JMSlider>
             </div>
-            <Container className="p-0 d-flex justify-content-center collapse">
-                <div className="chevron bottom"></div>
+            <Collapse in={bigIntControlsOpen}>
+                <div id="big-int-controls">
+                {mentionControls}
+                </div>
+            </Collapse>
+            <Container className="p-0 d-flex justify-content-center collapse-button" area-aria-controls="big-int-controls" aria-expanded={bigIntControlsOpen} onClick={()=>setBigIntControlsOpen(!bigIntControlsOpen)}>
+                <div className={"chevron " + (bigIntControlsOpen ? "top" : "bottom")}></div>
             </Container>
-            <BigIntInput />
         </div>
     );
 };

@@ -3,10 +3,11 @@ import "./App.css";
 import { Container } from "react-bootstrap";
 import ProposalCard from "./components/ProposalCard";
 import NewProposalCard from "./components/NewProposalCard";
-import { getDefaultMeritProfile } from "./components/JMSlider";
+import { getDefaultMeritProfile } from "./components/Mention";
 import {
     IDeliberator,
     MajorityJudgmentDeliberator,
+    NormalizedTally,
     Proposal,
     Tally,
     TallyCollector,
@@ -28,7 +29,7 @@ const App = () => {
     React.useEffect(() => {
         const deliberator: IDeliberator = new MajorityJudgmentDeliberator();
         const result = deliberator.deliberate(
-            new Tally(
+            new NormalizedTally(
                 proposals.map((proposal) => new Proposal(proposal.meritProfile.slice().reverse()))
             )
         );

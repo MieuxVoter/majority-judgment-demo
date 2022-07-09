@@ -22,13 +22,13 @@
     height: 32px;
 }
 
-.collapse {
+.collapse-button {
     height: 30px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.collapse:hover {
+.collapse-button:hover {
     background-color: #f2f0ff;
 }
 
@@ -88,6 +88,7 @@
 
 .chevron.top {
     transform: rotate(-45deg);
+    margin-top: 10px;
 }
 
 .chevron.right {
