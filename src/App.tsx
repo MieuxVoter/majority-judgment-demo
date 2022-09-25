@@ -74,6 +74,7 @@ const App = () => {
         <Container className="p-3">
             {proposals.map((proposal) => (
                 <ProposalCard
+                    key={proposal.name}
                     rank={proposal.rank}
                     proposal={proposal.name}
                     meritProfile={proposal.meritProfile}
