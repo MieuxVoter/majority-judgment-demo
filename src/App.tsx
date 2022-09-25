@@ -9,8 +9,6 @@ import {
     MajorityJudgmentDeliberator,
     NormalizedTally,
     Proposal,
-    Tally,
-    TallyCollector,
 } from "scalable-majority-judgment";
 
 type NamedProposal = {
