@@ -27,6 +27,9 @@ const App = () => {
     ]);
 
     React.useEffect(() => {
+        if (proposals.length == 0)
+            return;
+        
         const deliberator: IDeliberator = new MajorityJudgmentDeliberator();
         const result = deliberator.deliberate(
             new NormalizedTally(
