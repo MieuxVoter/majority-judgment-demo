@@ -66,11 +66,11 @@ const JMSlider = ({
     else if (!defaultMeritProfile) {
         mentions = mentions || defaultMentions;
 
-        if (mentions.length == 0) throw new Error("Mentions parameter cannot be empty");
+        if (mentions.length === 0) throw new Error("Mentions parameter cannot be empty");
 
         const amountPerMention = BigInt(Math.round(100 / mentions.length));
         defaultMeritProfile = mentions.map((_) => amountPerMention);
-    } else if (defaultMeritProfile.length == 0) {
+    } else if (defaultMeritProfile.length === 0) {
         throw new Error("defaultMeritProfile cannot be empty");
     }
 
@@ -79,19 +79,19 @@ const JMSlider = ({
     let setInternalMeritProfile: ((meritProfile: bigint[]) => void) | null = null;
 
     if (meritProfile) {
-        if (meritProfile.length == 0) throw new Error("meritProfile cannot be empty");
+        if (meritProfile.length === 0) throw new Error("meritProfile cannot be empty");
 
         internalMeritProfile = meritProfile;
     } else {
         if (!defaultMeritProfile) {
             if (mentions) {
-                if (mentions.length == 0) throw new Error("Mentions parameter cannot be empty");
+                if (mentions.length === 0) throw new Error("Mentions parameter cannot be empty");
 
                 defaultMeritProfile = mentions.map((_) => BigInt(1));
             } else {
                 throw new Error("Must define meritProfile or defaultMeritProfile or mentions.");
             }
-        } else if (defaultMeritProfile.length == 0) {
+        } else if (defaultMeritProfile.length === 0) {
             throw new Error("defaultMeritProfile cannot be empty");
         }
 
@@ -100,12 +100,12 @@ const JMSlider = ({
     }
 
     if (mentions == null) {
-        if (internalMeritProfile.length == defaultMentions.length) mentions = defaultMentions;
+        if (internalMeritProfile.length === defaultMentions.length) mentions = defaultMentions;
         else
             throw new Error(
                 "The merit profile does not have the same amount of default mentions. Define your own mentions in parameters"
             );
-    } else if (mentions.length != internalMeritProfile.length) {
+    } else if (mentions.length !== internalMeritProfile.length) {
         throw new Error("mentions parameter must have the same length than meritProfile");
     }
 

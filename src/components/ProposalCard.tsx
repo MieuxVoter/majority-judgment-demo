@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Navbar, Button, Collapse } from "react-bootstrap";
+import { Container, Button, Collapse } from "react-bootstrap";
 import JMSlider from "./JMSlider";
 import { getDefaultMentions, getDefaultMeritProfile, Mention } from "./Mention";
 import BigIntInput from "./BigIntInput";
@@ -28,11 +28,11 @@ const ProposalCard = ({
     const finalMeritProfile = meritProfile || meritProfileState;
 
     const [bigIntControlsOpen, setBigIntControlsOpen] = React.useState<boolean>(false);
-    const className = rank == 1 ? "proposal-card first" : "proposal-card";
+    const className = rank === 1 ? "proposal-card first" : "proposal-card";
     const finalMentions = mentions || getDefaultMentions();
     const nMention = finalMeritProfile.length
 
-    if (finalMentions.length != nMention)
+    if (finalMentions.length !== nMention)
         throw new Error("The amount of mention must be the same than mention index amount in meritProfile");
 
     const mentionControls = [];

@@ -25,7 +25,7 @@ const App = () => {
     ]);
 
     React.useEffect(() => {
-        if (proposals.length == 0)
+        if (proposals.length === 0)
             return;
         
         const deliberator: IDeliberator = new MajorityJudgmentDeliberator();
@@ -40,6 +40,7 @@ const App = () => {
         }
 
         setProposals(proposals.slice(0));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [lastUpdateTime]);
 
     const onNewProposalSubmitted = (newProposal: string) => {
@@ -60,7 +61,7 @@ const App = () => {
     const onProposalDeleted = (proposalToDelete: NamedProposal) => {
         let index = proposals.indexOf(proposalToDelete);
 
-        if (index != -1) {
+        if (index !== -1) {
             proposals.splice(index, 1);
             setProposals(proposals.slice(0));
         }
