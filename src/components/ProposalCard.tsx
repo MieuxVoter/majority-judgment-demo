@@ -48,7 +48,7 @@ const ProposalCard = ({
                 onValueChanged(newMeritProfile);
         }
 
-        mentionControls.push(<BigIntInput key={i} color={finalMentions[i].color} value={finalMeritProfile[i]} onChange={onControlChange} className="my-3"/>);
+        mentionControls.push(<BigIntInput key={i} buttonStyle={{color:finalMentions[i].color, background: finalMentions[i].backgroundImage}} bigIntValue={finalMeritProfile[i]} onBigIntValueChange={onControlChange} className="my-3"/>);
     }
 
     return (

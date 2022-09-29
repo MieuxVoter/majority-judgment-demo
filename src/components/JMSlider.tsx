@@ -21,13 +21,15 @@ const StyledContainer = styled.div`
 const StyledTrack = styled.div`
     top: 0;
     bottom: 0;
-    background: ${(props: any) => defaultMentions[props.index].color};
+    background-color: ${(props: any) => defaultMentions[props.index].color};
+    background-repeat: repeat;
+    background-image: url(/${(props: any) => defaultMentions[props.index].backgroundImage});
 `;
 
 const StyledDiv = styled.div`
-    background-color: ${(props: any) => {
-        return props.color;
-    }};
+    background-color: ${(props: any) => props.color};
+    background-repeat: repeat;
+    background-image: url(/${(props: any) => props.backgroundImage});
 `;
 
 const defaultMentions: Mention[] = getDefaultMentions();
@@ -140,7 +142,7 @@ const JMSlider = ({
 
     return (
         <>
-            <MentionDiv className="mention-container" color={mention.color}>
+            <MentionDiv className="mention-container" {...mention}>
                 {mention.name}
             </MentionDiv>
             <StyledContainer>
