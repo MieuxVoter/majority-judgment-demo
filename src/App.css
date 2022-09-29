@@ -1,0 +1,195 @@
+* {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.btn-outline-danger {
+    border-color: #ff3e37 !important;
+    background-color: #f2f0ff !important;
+    color: #ff3e37 !important;
+}
+
+.btn-outline-danger:hover {
+    background-color: #ff3e37 !important;
+    color: #f2f0ff !important;
+}
+
+.btn-delete {
+    width: 38px;
+    height: 32px;
+}
+
+.collapse-button {
+    height: 30px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.collapse-button:hover {
+    background-color: #f2f0ff;
+}
+
+.proposal-card.first {
+    color: #2400fd;
+}
+
+.proposal-card .header div span {
+    background-color: #0a004c;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 32px;
+    color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 8px;
+}
+
+.proposal-card.first .header div span {
+    background-color: #2400fd;
+}
+
+.proposal-card {
+    color: #0a004c;
+}
+
+.proposal-card .header {
+    height: 56px;
+    vertical-align: middle;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.proposal-card .chevron {
+    padding: auto;
+}
+
+.proposal-card .header button {
+    margin-left: auto;
+}
+
+.chevron {
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    content: "";
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    position: relative;
+    vertical-align: top;
+    border-color: #b1adc6;
+}
+
+.chevron.top {
+    transform: rotate(-45deg);
+    margin-top: 10px;
+}
+
+.chevron.right {
+    transform: rotate(45deg);
+}
+
+.chevron.bottom {
+    transform: rotate(135deg);
+}
+
+.chevron.left {
+    transform: rotate(-135deg);
+}
+
+html,
+body {
+    background-color: #191e2f !important;
+}
+
+.proposal-card {
+    background-color: white;
+    margin-bottom: 8px;
+}
+
+.proposal-card input {
+    border-color: #2400fd;
+    background-color: #f2f0ff;
+}
+
+.proposal-card.new button.btn-primary {
+    background-color: #2400fd;
+    font-size: 24px;
+    margin-left: 10px;
+    width: 38px;
+    line-height: 0.5;
+}
+
+.proposal-card.new {
+    height: 56px;
+    padding: 12px;
+}
+
+.jm-vr {
+    border-left: 2px dashed #0a00ac;
+    height: 36px;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.mention-container {
+    width: 74px !important;
+    height: 32px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    margin: auto;
+    padding: 3px 0;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
