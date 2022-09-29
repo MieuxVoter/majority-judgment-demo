@@ -40,7 +40,7 @@ const ProposalCard = ({
     for (let i = 0; i < nMention; ++i){
         const index = i;
         const onControlChange = (value:bigint)=>{
-            finalMeritProfile[index] = value;
+            finalMeritProfile[index] = value >= BigInt(0) ? value : BigInt(0);
             const newMeritProfile = finalMeritProfile.slice(0); 
             setMeritProfileState(newMeritProfile);
     
