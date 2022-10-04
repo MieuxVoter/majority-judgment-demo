@@ -36,11 +36,12 @@ const ProposalCard = ({
         throw new Error("The amount of mention must be the same than mention index amount in meritProfile");
 
     const mentionControls = [];
+    const bigInt = BigInt;
 
     for (let i = 0; i < nMention; ++i){
         const index = i;
         const onControlChange = (value:bigint)=>{
-            finalMeritProfile[index] = value >= BigInt(0) ? value : BigInt(0);
+            finalMeritProfile[index] = value >= bigInt(0) ? value : bigInt(0);
             const newMeritProfile = finalMeritProfile.slice(0); 
             setMeritProfileState(newMeritProfile);
     
